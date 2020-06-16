@@ -6,8 +6,8 @@ namespace task0
     {
         interface MarkSettings
         {
-            public double GetAvgMark(Mark[] marks);
-            public void ResetAllMarks(Mark[] marks);
+            public double GetAvgMark();
+            public void ResetAllMarks();
         }
 
         class Student : MarkSettings
@@ -55,22 +55,70 @@ namespace task0
                 return studMarks;
             }
 
-            public double GetAvgMark(Mark[] marks)
+            public double GetAvgMark()
             {
                 double avg = 0.0;
-                foreach (Mark mark in marks)
+                foreach (Mark mark in studMarks)
                 {
                     avg += mark.GetMark();
                 }
-                avg /= marks.GetLength(1);
+                avg /= studMarks.GetLength(1);
                 return avg;
             }
 
-            public void ResetAllMarks(Mark[] marks)
+            public void ResetAllMarks()
             {
-                foreach (Mark mark in marks)
+                foreach (Mark mark in studMarks)
                 {
                     mark.SetMark(0);
+                }
+            }
+
+            
+            public string StudentRate(Student student)
+            {
+                if (GetAvgMark() >= 9)
+                {
+                    return "отличник";
+                }
+                else if (GetAvgMark() >= 7)
+                {
+                    return "хорошист";
+                }
+                else if (GetAvgMark() >= 4)
+                {
+                    return "средний";
+                }
+                else
+                {
+                    return "отчислен";
+                }
+            }
+
+            public void PositiveMarksCount(out int count)
+            {
+                int i;
+                for (i = 0, count = 0; i < studMarks.Length; i++)
+                {
+                    if (studMarks[i].GetMark() >= 4)
+                        count++;
+                }
+            }
+
+            public void PassTheExamAgain(ref Mark badMark)
+            {
+                switch (badMark.GetMark())
+                {
+                    case 1:
+                        badMark.SetMark(4);
+                        break;
+                    case 2:
+                        goto case 1;
+                    case 3:
+                        goto case 1;
+                    default:
+                        Console.WriteLine("Оценку исправлять не нужно");
+                        break;
                 }
             }
         }
