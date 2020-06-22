@@ -1,173 +1,94 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace task0
+namespace task6
 {
     class Program
     {
-        interface MarkSettings
+        public class Employee
         {
-            public double GetAvgMark();
-            public void ResetAllMarks();
-        }
+            private long empID;
+            private string empName;
+            private DateTimeOffset empBirthday;
+            private double empSalary;
 
-        class Student : MarkSettings
-        {
-            private string studName;
-            private int studAge;
-            private Mark[] studMarks;
-
-            public Student()
-            { }
-
-            public Student(string name, int age)
+            public Employee()
             {
-                studName = name;
-                studAge = age;
+                empID = 0;
+                empName = "";
+                empBirthday = DateTimeOffset.MinValue;
+                empSalary = 0.0;
             }
 
-            public string GetName()
+            public Employee(long id, string name, DateTimeOffset birthday, double salary)
             {
-                return studName;
+
+                empName = name;
+                empBirthday = birthday;
+                empSalary = salary;
+            }
+
+            public void SetId(long id)
+            {
+                empID = id;
+            }
+
+            public long GetId()
+            {
+                return empID;
             }
 
             public void SetName(string name)
             {
-                studName = name;
+                empName = name;
             }
 
-            public int GetAge()
+            public string GetName()
             {
-                return studAge;
+                return empName;
             }
 
-            public void SetAge(int age)
+            public void SetBirthday(DateTimeOffset bd)
             {
-                studAge = age;
+                empBirthday = bd;
             }
 
-            public void AddMark(Mark mark)
+            public DateTimeOffset GetBirthday()
             {
-                studMarks[studMarks.Length] = mark;
+                return empBirthday;
             }
 
-            public Mark[] GetStudentSMarks()
+            public void SetSalary(double salary)
             {
-                return studMarks;
+                empSalary = salary;
             }
 
-            public double GetAvgMark()
+            public double GetSalary()
             {
-                double avg = 0.0;
-                foreach (Mark mark in studMarks)
+                return empSalary;
+            }
+
+            public void SortByBirthday(ref List<Employee> employees)
+            {
+                for (int i = 0; i < employees.Count - 1; i++)
                 {
-                    avg += mark.GetMark();
-                }
-                avg /= studMarks.GetLength(1);
-                return avg;
-            }
-
-            public void ResetAllMarks()
-            {
-                foreach (Mark mark in studMarks)
-                {
-                    mark.SetMark(0);
-                }
-            }
-
-            
-            public string StudentRate(Student student)
-            {
-                if (GetAvgMark() >= 9)
-                {
-                    return "отличник";
-                }
-                else if (GetAvgMark() >= 7)
-                {
-                    return "хорошист";
-                }
-                else if (GetAvgMark() >= 4)
-                {
-                    return "средний";
-                }
-                else
-                {
-                    return "отчислен";
-                }
-            }
-
-            public void PositiveMarksCount(out int count)
-            {
-                int i;
-                for (i = 0, count = 0; i < studMarks.Length; i++)
-                {
-                    if (studMarks[i].GetMark() >= 4)
-                        count++;
-                }
-            }
-
-            public void PassTheExamAgain(ref Mark badMark)
-            {
-                switch (badMark.GetMark())
-                {
-                    case 1:
-                        badMark.SetMark(4);
-                        break;
-                    case 2:
-                        goto case 1;
-                    case 3:
-                        goto case 1;
-                    default:
-                        Console.WriteLine("Оценку исправлять не нужно");
-                        break;
+                    for (int j = i + 1; j < employees.Count; j++)
+                    {
+                        if (employees[i].GetBirthday() < employees[j].GetBirthday())
+                        {
+                            Employee buffer = employees[i];
+                            employees[i] = employees[j];
+                            employees[j] = buffer;
+                        }
+                    }
                 }
             }
         }
-
-        class Mark
-        {
-            private string subjectName;
-            private int mark;
-
-            public Mark()
-            { }
-
-            public Mark(string subj, int m)
-            {
-                subjectName = subj;
-                mark = m;
-            }
-
-            public Mark(Mark m)
-            {
-                this.subjectName = m.GetSubject();
-                this.mark = m.GetMark();
-            }
-
-            public string GetSubject()
-            {
-                return subjectName;
-            }
-
-            public void SetSubject(string subj)
-            {
-                subjectName = subj;
-            }
-
-            public int GetMark()
-            {
-                return mark;
-            }
-
-            public void SetMark(int m)
-            {
-                mark = m;
-            }
-        }
-
-
         static void Main(string[] args)
         {
-            
         }
     }
 }
