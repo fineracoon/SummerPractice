@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace task6
 {
-    public class Employee : IComparable<Employee>
+    public class Employee 
     {
         private long empID;
         private string empName;
