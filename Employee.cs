@@ -89,11 +89,9 @@ namespace task6
 
         public int CompareTo(Employee other)
         {
-            if (this.GetBirthday() < other.GetBirthday())
-                return 1;
-            else if (this.GetBirthday() > other.GetBirthday())
-                return -1;
-            else return 0;
+            if (this.GetBirthday().CompareTo(other.GetBirthday()) == 0)
+                return this.GetSalary().CompareTo(other.GetSalary());
+            return this.GetBirthday().CompareTo(other.GetBirthday());
         }
     }
 }
