@@ -86,12 +86,5 @@ namespace task6
                    "Date of birthday: " + this.empBirthday.ToString("dd.MM.yyyy") + "\r\n" +
                    "Salary: " + empSalary + "\r\n");
         }
-
-        public int CompareTo(Employee other)
-        {
-            if (this.GetBirthday().CompareTo(other.GetBirthday()) == 0)
-                return this.GetSalary().CompareTo(other.GetSalary());
-            return this.GetBirthday().CompareTo(other.GetBirthday());
-        }
     }
 }
