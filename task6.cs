@@ -28,9 +28,15 @@ namespace task6
                 e.toString();
             }
 
-            Array.Sort(employees);
+            Array.Sort(employees, new CompareByBirthday());
+            Console.WriteLine("After sorting by birthday:");
+            foreach (Employee e in employees)
+            {
+                e.toString();
+            }
 
-            Console.WriteLine("After sorting");
+            Array.Sort(employees, new CompareBySalary());
+            Console.WriteLine("\r\nAfter sorting by salary:");
             foreach (Employee e in employees)
             {
                 e.toString();
