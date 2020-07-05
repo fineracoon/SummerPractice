@@ -1,2 +1,2 @@
-# taskAnimals folder. 
-Develop a small (5-6 entities) model for animal world using classes and interfaces. Develop a generic class Group for storing animals in groups.
+# taskHuman folder. 
+Develop a custom class Human containing basic information about a person and two subclasses of a Human class – Boy and Girl classes. Represent differences of two classes by adding new methods and properties into subclasses; represent similarities by overriding methods and properties of a base class.
